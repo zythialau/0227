@@ -572,12 +572,12 @@ export default function Brochure() {
             {submitStatus === 'success' && (
               <div className="mt-6 p-5 bg-green-50 border border-green-100 rounded-xl text-center transform transition-all duration-500 opacity-100 translate-y-0">
                 <p className="text-sm text-green-700 font-medium mb-3">
-                  🎉
-                  感谢您的预约！请扫描下方二维码，添加官方助理获取沙龙详细资料：
+                  
+            感谢您的预约！请扫描下方二维码，与我们详细洽谈：
                 </p>
                 {/* 替換為您的真實二維碼圖片網址 */}
                 <img
-                  src="wecom partner qrcode.png"
+                  src="wecom-partner-qr.png"
                   alt="添加官方助理"
                   className="w-32 h-32 mx-auto rounded-lg shadow-sm border border-green-200"
                 />

@@ -22,7 +22,7 @@ function GoldDivider() {
 }
 
 export default function Brochure() {
-  const partnerType = import.meta.env.VITE_PARTNER_TYPE || 'university';
+  const partnerType = import.meta.env.VITE_PARTNER_TYPE || 'travel';
 
   // --- 頁面內容設定 (完全保留官方文案) ---
   const getPageContent = () => {
@@ -30,7 +30,8 @@ export default function Brochure() {
       case 'travel':
         return {
           heroPrefix: '旅行社',
-          heroImage: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+          heroImage:
+            'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
           audienceTitle: '旅行社合作伙伴',
           audiences: [
             { title: '高端定制游负责人', desc: '寻求高附加值旅游产品与差异化路线' },
@@ -159,7 +160,7 @@ export default function Brochure() {
           <img src="/hero-logo.png" alt="波尔国际商学" className="h-24 md:h-40 w-auto mb-8 drop-shadow-2xl object-contain" />
           
           <p className="text-[#C9A84C] tracking-[0.4em] text-sm md:text-base font-bold mb-4 uppercase drop-shadow-md">
-            GOAT International Business School
+            GOAT International Business
           </p>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-[#F5F0E8] mb-6 drop-shadow-xl leading-tight">
@@ -182,13 +183,13 @@ export default function Brochure() {
           
           <div className="mt-10 space-y-6 text-[#F5F0E8]/80 text-sm md:text-base leading-relaxed text-left md:text-center max-w-3xl mx-auto font-light">
             <p>
-              在当前跨境教育市场中，充斥着「挂羊头卖狗肉」的劣质研学团——将学生卖给保险公司，由保险销售充当老师，高昂费用换来的只是一场变相推销。
+            当前跨境教育市场上，不少研学项目名不副实——学生被安排参观保险公司，由销售人员充当“讲师”，高昂费用换来的只是一场变相推销。
             </p>
             <p>
-              <span className="text-[#C9A84C] font-medium">波尔国际商学</span>，由香港本土专业团队创立，坚持「打包教师输出」模式，确保每一位走进课堂的导师都是真正的教育工作者，而非销售人员。
+              <span className="text-[#C9A84C] font-medium">波尔国际商学</span>，由扎根香港的专业团队创立，坚持「专业导师全程执教」模式，确保每一位走进课堂的导师都是真正的教育工作者，而非销售人员。
             </p>
             <p className="text-lg mt-8">
-              我们的使命是：<span className="text-[#C9A84C] font-medium block md:inline mt-2 md:mt-0">传递正确无误的资讯，提供最专业的咨询服务，传授正确的金融观念。</span>
+              我们的使命是：<span className="text-[#C9A84C] font-medium block md:inline mt-2 md:mt-0">传递真实准确的资讯，提供专业可靠的咨询服务，帮助学生建立健康的观念。</span>
             </p>
           </div>
 
@@ -433,7 +434,7 @@ export default function Brochure() {
             </div>
           </div>
           <div className="border-t border-white/10 mt-16 pt-8 text-center text-gray-500 text-xs tracking-wider">
-            <p>&copy; {new Date().getFullYear()} 波尔国际商学 (CNGOAT). All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} 波尔国际商学 . All rights reserved.</p>
           </div>
         </div>
       </footer>

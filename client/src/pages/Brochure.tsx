@@ -22,16 +22,101 @@ function GoldDivider() {
 }
 
 export default function Brochure() {
-  const partnerType = import.meta.env.VITE_PARTNER_TYPE || 'uni';
+  // 1. 自動偵測網址子網域，決定要顯示哪一個主題
+  const getInitialType = () => {
+    if (typeof window !== 'undefined') {
+      // 👇 🌟 加入這三行：StackBlitz 專用的「秘密預覽通道」 👇
+      const searchParams = new URLSearchParams(window.location.search);
+      const preview = searchParams.get('preview');
+      if (preview) return preview; 
 
-  // --- 頁面內容設定 (完全保留官方文案) ---
+      // 原本的正式網域判斷邏輯
+      const hostname = window.location.hostname;
+      if (hostname.startsWith('career')) return 'career';
+      if (hostname.startsWith('hkedu') || hostname.startsWith('hk-edu')) return 'hk_edu';
+    }
+    // 如果不是上面兩個專屬網址，就讀取原本的設定
+    return import.meta.env.VITE_PARTNER_TYPE || 'education';
+  };
+
+  const [partnerType, setPartnerType] = useState(getInitialType());
+
+  // --- 頁面內容設定 (完美融合 5 大主題) ---
   const getPageContent = () => {
     switch (partnerType) {
+      // 👇 新增 1：大学生职业规划专题
+      case 'career':
+        return {
+          heroPrefix: '大学生职业规划专题',
+          heroImage: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+          audienceTitle: '适合人群',
+          audiences: [
+            { title: '在校大学生及硕博生', desc: '探索未来职业方向，打破求职迷茫期，提前布局职场路径。' },
+            { title: '应届毕业生', desc: '急需提升面试技巧、简历包装与获取名企敲门砖。' },
+            { title: '高校就业指导老师', desc: '寻求优质企业资源库与前沿的实战就业指导体系。' },
+            { title: '初入职场青年', desc: '渴望突破职业初期瓶颈，实现跨越式发展与高阶跃升。' },
+          ],
+          coreValues: [
+            { title: '名企视角解码', desc: '从全球500强HR的视角出发，拆解高薪职位的核心能力模型。' },
+            { title: '实战能力跃升', desc: '引入波尔国际商学实战案例，填补学术理论与商业实践的鸿沟。' },
+            { title: '专属人脉圈层', desc: '链接业界精英导师，搭建高价值的职场初期人脉网络。' },
+            { title: '个性化职业锚定', desc: '科学评估个人优势，量身定制长效清晰的职业发展路径。' },
+          ],
+          benefits: [
+            { title: '重塑求职思维', tag: '认知升级', desc: '打破传统求职信息差，掌握大厂录用的底层逻辑。', icon: BookOpen },
+            { title: '斩获内推机遇', tag: '资源赋能', desc: '表现优异者将有机会获得波尔专属名企实习与全职内推名额。', icon: TrendingUp },
+            { title: '提升面试胜率', tag: '实战演练', desc: '沉浸式面试模拟与复盘，全面提升临场应变与表达能力。', icon: Award },
+            { title: '获取专属指导', tag: '长期陪伴', desc: '加入波尔校友网络，获取长期的职业发展诊断与咨询。', icon: Users },
+          ],
+          agenda: [
+            { time: '10分钟', title: '破冰与导入', desc: '聚焦当下就业大环境，引发职业规划深度思考。' },
+            { time: '20分钟', title: '板块一：破局与定位', desc: '大学生如何避免随波逐流？科学锚定职业发展方向。' },
+            { time: '40分钟', title: '板块二：核心竞争力', desc: '深度解码名企用人标准，打造高含金量背景。' },
+            { time: '40分钟', title: '板块三：波尔实战赋能', desc: '波尔如何助力青年学子实现从校园到名企的跃升。' },
+            { time: '30分钟', title: '板块四：Q&A 专家答疑', desc: '直击求职痛点，专家现场提供一对一职业诊断。' },
+            { time: '40分钟', title: '交流联谊', desc: '建立优质职场人脉，与导师及同侪深度交流。' },
+          ]
+        };
+
+      // 👇 新增 2：香港升学规划专题
+      case 'hk_edu':
+        return {
+          heroPrefix: '香港升学规划专题', 
+          heroImage: 'https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+          audienceTitle: '适合人群',
+          audiences: [
+            { title: '意向赴港升学的学生', desc: '希望获取真实院校资讯，明确申请方向与策略。' },
+            { title: '关注教育规划的家长', desc: '为子女寻求高性价比的国际化教育路径。' },
+            { title: '国际学校/培训主管', desc: '拓展优质的香港教育资源与背景提升项目合作。' },
+            { title: '职场进修人士', desc: '寻求通过香港授课型硕士实现学历晋升与跳板。' },
+          ],
+          coreValues: [
+            { title: '打破信息差', desc: '传递真实的香港高校录取数据与最新政策，拒绝包装。' },
+            { title: '定制化升学策略', desc: '根据学生学术背景与预算，科学制定冲刺与保底方案。' },
+            { title: '全维背景提升', desc: '提供高含金量的研学与实习，填补软实力短板。' },
+            { title: '升学就业全链条', desc: '不仅关注成功录取，更着眼于毕业后的留港就业。' },
+          ],
+          benefits: [
+            { title: '精准择校定位', tag: '路径规划', desc: '专家一对一评估，量身打造最适合的申请矩阵。', icon: BookOpen },
+            { title: '提升录取概率', tag: '背景赋能', desc: '获取独家商业研学履历，在海量申请者中脱颖而出。', icon: TrendingUp },
+            { title: '掌握前沿政策', tag: '资讯获取', desc: '深度解读香港人才引进计划及毕业生留港发展红利。', icon: Award },
+            { title: '融入精英生态', tag: '资源共享', desc: '提前建立香港本土圈层，无缝衔接未来发展。', icon: Users },
+          ],
+          agenda: [
+            { time: '10分钟', title: '破冰与导入', desc: '解读香港作为国际教育枢纽的核心优势与人才红利。' },
+            { time: '20分钟', title: '板块一：宏观趋势解析', desc: '深度剖析八大名校最新录取门槛与热门专业。' },
+            { time: '40分钟', title: '板块二：高效升学策略', desc: '如何避开申请雷区？量身定制背景提升通关秘籍。' },
+            { time: '40分钟', title: '板块三：波尔全链赋能', desc: '波尔如何通过专业研学，打通「升学→就业」闭环。' },
+            { time: '30分钟', title: '板块四：Q&A 开放式问答', desc: '针对个体情况，专家提供客观的升学可行性评估。' },
+            { time: '40分钟', title: '深度洽谈', desc: '自由交流与一对一深度咨询对接。' },
+          ]
+        };
+
+      // 👇 保留原本 1：旅行社
       case 'travel':
         return {
           heroPrefix: '旅行社',
-          heroImage:
-            'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+          heroImage: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
           audienceTitle: '旅行社合作伙伴',
           audiences: [
             { title: '高端定制游负责人', desc: '寻求高附加值旅游产品与差异化路线' },
@@ -52,6 +137,8 @@ export default function Brochure() {
             { title: '建立产业生态联盟', tag: '生态共建', desc: '共享导师与渠道资源，打造跨界合作共同体。', icon: Users },
           ],
         };
+
+      // 👇 保留原本 2：高校
       case 'university':
         return {
           heroPrefix: '高校',
@@ -76,6 +163,8 @@ export default function Brochure() {
             { title: '建立名企合作网络', tag: '生态共建', desc: '打造校企联合培养基地，实现资源互补与协同发展。', icon: Users },
           ],
         };
+
+      // 👇 保留原本 3：教育机构 (預設)
       case 'education':
       default:
         return {
@@ -147,13 +236,11 @@ export default function Brochure() {
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
       {/* --- Hero 主視覺 --- */}
       <div className="relative h-[500px] w-full overflow-hidden bg-[#0A1628] shrink-0">
-        {/* 👇 1. 降低圖片透明度 (opacity-40)，讓背景變暗、退到視覺後方 */}
         <img
           src={content.heroImage}
           alt={`${content.heroPrefix} Hero Background`}
           className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity"
         />
-        {/* 👇 2. 全面加深遮罩：從上到下都使用深海藍，確保所有白色文字(包含副標題)都清晰銳利 */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/70 via-[#0A1628]/80 to-[#0A1628]"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
@@ -164,17 +251,16 @@ export default function Brochure() {
           </p>
           
           <h1 className="text-4xl md:text-6xl font-extrabold text-[#F5F0E8] mb-6 drop-shadow-xl leading-tight">
-            {content.heroPrefix}沙龙讲座邀请函
+            {content.heroPrefix}<br></br>沙龙讲座邀请函
           </h1>
           <GoldDivider />
-          {/* 👇 3. 確保副標題顏色夠亮 (text-[#F5F0E8])，在暗背景上非常清晰 */}
           <p className="text-lg md:text-xl text-[#F5F0E8] mt-6 max-w-3xl font-light tracking-wide drop-shadow-lg">
             探索全球商业机遇 · 赋能新时代教育 · 精英成长与升学规划
           </p>
         </div>
       </div>
 
-      {/* --- 全新植入：為什麼選擇波爾 (Our Mission) --- */}
+      {/* --- 為什麼選擇波爾 (Our Mission) --- */}
       <section className="bg-[#0A1628] py-20 px-4 relative overflow-hidden shrink-0 border-t border-[#C9A84C]/20">
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <p className="text-[#C9A84C] tracking-[0.3em] text-sm mb-4 font-semibold uppercase">Our Mission</p>
@@ -265,40 +351,54 @@ export default function Brochure() {
                       <th className="px-6 py-4 text-left text-xs font-bold text-[#C9A84C] uppercase tracking-wider">描述</th>
                     </tr>
                   </thead>
+                  
+                  {/* 👇 這裡就是自動判斷：如果有新版 agenda 就用新的，沒有就顯示舊版固定表格 */}
                   <tbody className="bg-white divide-y divide-gray-100">
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">10分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">破冰与导入</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">简述活动背景，引出核心议题。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">
-                        主题探讨
-                        <div className="text-xs text-gray-500 font-normal mt-1">（主题由校方与波尔共同选定）</div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">深入分享本次沙龙的核心议题。</td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">香港及海外升学就业趋势</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">解读香港及海外升学就业最新动态，助力宏观认知。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">波尔国际商学全景介绍</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">全面介绍波尔教育理念、课程体系、师资力量与学员成果。</td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">30分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">Q&A 开放式问答</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">波尔专家现场解答升学规划、课程设置等热點問題。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">交流联谊 & 深度洽談</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">自由交流与资源对接。</td>
-                    </tr>
+                    {content.agenda ? (
+                      content.agenda.map((item, index) => (
+                        <tr key={index} className={index % 2 === 1 ? "bg-slate-50 hover:bg-gray-100" : "hover:bg-gray-50"}>
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">{item.time}</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">{item.title}</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">{item.desc}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <>
+                        <tr className="hover:bg-gray-50">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">10分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">破冰与导入</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">简述活动背景，引出核心议题。</td>
+                        </tr>
+                        <tr className="bg-slate-50 hover:bg-gray-100">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">
+                            主题探讨
+                            <div className="text-xs text-gray-500 font-normal mt-1">（主题由校方与波尔共同选定）</div>
+                          </td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">深入分享本次沙龙的核心议题。</td>
+                        </tr>
+                        <tr className="hover:bg-gray-50">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">香港及海外升学就业趋势</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">解读香港及海外升学就业最新动态，助力宏观认知。</td>
+                        </tr>
+                        <tr className="bg-slate-50 hover:bg-gray-100">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">波尔国际商学全景介绍</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">全面介绍波尔教育理念、课程体系、师资力量与学员成果。</td>
+                        </tr>
+                        <tr className="hover:bg-gray-50">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">30分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">Q&A 开放式问答</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">波尔专家现场解答升学规划、课程设置等热點問題。</td>
+                        </tr>
+                        <tr className="bg-slate-50 hover:bg-gray-100">
+                          <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
+                          <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">交流联谊 & 深度洽談</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">自由交流与资源对接。</td>
+                        </tr>
+                      </>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -398,7 +498,6 @@ export default function Brochure() {
             {/* 成功後在按鈕下方顯示 VIP 二維碼區塊 */}
             {submitStatus === 'success' && (
               <div className="mt-6 p-6 bg-gradient-to-b from-[#C9A84C]/10 to-transparent border border-[#C9A84C]/30 rounded-sm text-center transform transition-all duration-500 opacity-100 translate-y-0 relative overflow-hidden">
-                {/* 裝飾性金屬小角落 */}
                 <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#C9A84C]/60" />
                 <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-[#C9A84C]/60" />
                 <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-[#C9A84C]/60" />
@@ -431,7 +530,7 @@ export default function Brochure() {
         </div>
       </div>
 
-      {/* --- 頁尾 (遵循官方名稱) --- */}
+      {/* --- 頁尾 --- */}
       <footer className="bg-[#0A1628] text-white pt-16 pb-8 border-t border-[#C9A84C]/20 shrink-0 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">

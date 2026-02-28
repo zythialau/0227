@@ -21,90 +21,42 @@ function GoldDivider() {
   );
 }
 
-export default function Brochure() {
+export default function HkEduBrochure() {
   const partnerType = import.meta.env.VITE_PARTNER_TYPE || 'uni';
 
   // --- 頁面內容設定 (完全保留官方文案) ---
-  const getPageContent = () => {
-    switch (partnerType) {
-      case 'travel':
-        return {
-          heroPrefix: '旅行社',
-          heroImage:
-            'https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-          audienceTitle: '旅行社合作伙伴',
-          audiences: [
-            { title: '高端定制游负责人', desc: '寻求高附加值旅游产品与差异化路线' },
-            { title: '研学旅行机构创始人', desc: '结合国际教育资源，打造深度研学项目' },
-            { title: '出境游业务总监', desc: '拓展海外名企参访与高校交流渠道' },
-            { title: '高端客户关系经理', desc: '为高净值家庭提供增值教育与背景提升服务' },
-          ],
-          coreValues: [
-            { title: '赋能旅游产品升级', desc: '引入波尔国际商学实战体系，打破同质化竞争，提升客单价。' },
-            { title: '独家海外参访资源', desc: '共享全球500强企业与顶尖高校的深度参访渠道。' },
-            { title: '提升品牌溢价', desc: '借助国际化教育IP，打造高端研学旅行标杆品牌。' },
-            { title: '长效客户转化', desc: '从单次旅游向长期教育规划延伸，提升客户终身价值。' },
-          ],
-          benefits: [
-            { title: '丰富研学路线', tag: '产品升级', desc: '结合商业素养，打造独具特色的海外名企名校研学营。', icon: BookOpen },
-            { title: '提升品牌影响力', tag: '品牌赋能', desc: '借助波尔国际品牌背书，提升机构在当地市场的知名度与美誉度。', icon: Award },
-            { title: '拓宽利润空间', tag: '营收增长', desc: '通过高附加值的教育内容，提升整体项目利润率。', icon: TrendingUp },
-            { title: '建立产业生态联盟', tag: '生态共建', desc: '共享导师与渠道资源，打造跨界合作共同体。', icon: Users },
-          ],
-        };
-      case 'university':
-        return {
-          heroPrefix: '高校',
-          heroImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-          audienceTitle: '高校合作伙伴',
-          audiences: [
-            { title: '高校就业指导中心', desc: '提升学生职场竞争力与名企录用率' },
-            { title: '商学院/经管学院领导', desc: '引入前沿商业实战案例与企业导师' },
-            { title: '国际交流处负责人', desc: '拓展海外名校交流与联合培养项目' },
-            { title: '创新创业学院导师', desc: '为学生创投项目提供商业孵化与指导' },
-          ],
-          coreValues: [
-            { title: '产学研深度融合', desc: '将波尔国际商学企业案例库引入课堂，实现理论与实践接轨。' },
-            { title: '全球名企实习内推', desc: '共享500强企业资源，为优秀学生提供专属实习与就业通道。' },
-            { title: '国际化师资共建', desc: '引入全球顶尖商学院客座教授与企业高管进行联合授课。' },
-            { title: '提升升学就业率', desc: '全面提升学生综合商业素养，助力海外深造与名企入职。' },
-          ],
-          benefits: [
-            { title: '完善实战课程', tag: '教学升级', desc: '引入国际化商业素养课程，提升教学质量与竞争力。', icon: BookOpen },
-            { title: '提升学术影响力', tag: '品牌赋能', desc: '承办高规格国际商业论坛，扩大院校知名度。', icon: Award },
-            { title: '拓展高质量就业', tag: '升学就业', desc: '为学生提供更多元化的国际名企实习与就业机会。', icon: TrendingUp },
-            { title: '建立名企合作网络', tag: '生态共建', desc: '打造校企联合培养基地，实现资源互补与协同发展。', icon: Users },
-          ],
-        };
-      case 'education':
-      default:
-        return {
-          heroPrefix: '教育机构',
-          heroImage: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-          audienceTitle: '目标受众',
-          audiences: [
-            { title: '国际学校校长/负责人', desc: '寻求优质国际课程资源与升学通道' },
-            { title: '培训机构创始人', desc: '拓宽高端产品线与提升品牌竞争力' },
-            { title: '留学中介机构负责人', desc: '为客户提供背景提升与职业规划服务' },
-            { title: '素质教育机构负责人', desc: '引入商业素养课程，丰富教学内容' },
-          ],
-          coreValues: [
-            { title: '获得独家课程授权', desc: '引入波尔国际商学成熟的商业素养体系，填补市场空白。' },
-            { title: '建立教育生态联盟', desc: '共享师资、生源与渠道资源，打造教育产业共同体。' },
-            { title: '提升品牌影响力', desc: '借助波尔国际品牌背书，提升机构在当地市场的知名度与美誉度。' },
-            { title: '拓展升学与就业渠道', desc: '为学生提供更多元化的国际升学路径与职业发展机会。' },
-          ],
-          benefits: [
-            { title: '丰富课程体系', tag: '课程升级', desc: '引入国际化商业素养课程，提升教学质量与竞争力。', icon: BookOpen },
-            { title: '提升品牌影响力', tag: '品牌赋能', desc: '借助波尔国际品牌背书，提升机构在当地市场的知名度与美誉度。', icon: Award },
-            { title: '拓展升学与就业渠道', tag: '升学就业', desc: '为学生提供更多元化的国际升学路径与职业发展机会。', icon: TrendingUp },
-            { title: '建立教育生态联盟', tag: '生态共建', desc: '共享师资、生源与渠道资源，打造教育产业共同体。', icon: Users },
-          ],
-        };
-    }
+  // --- 香港升学规划专题 内容 ---
+  const content = {
+    heroPrefix: '香港升学规划专题', 
+    heroImage: 'https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
+    audienceTitle: '适合人群',
+    audiences: [
+      { title: '意向赴港升学的学生', desc: '希望获取真实无水分的院校资讯，明确申请方向与策略。' },
+      { title: '关注教育规划的家长', desc: '为子女寻求高性价比、高回报率的国际化教育路径。' },
+      { title: '国际学校/培训机构主管', desc: '拓展优质的香港教育资源与背景提升项目合作。' },
+      { title: '职场进修人士', desc: '寻求通过香港授课型硕士（Taught Master）实现学历晋升与跳板。' },
+    ],
+    coreValues: [
+      { title: '打破信息差', desc: '传递100%真实的香港高校录取数据与最新政策，拒绝包装与营销。' },
+      { title: '定制化升学策略', desc: '根据学生学术背景与预算，科学制定冲刺、匹配与保底方案。' },
+      { title: '全维背景提升', desc: '依托波尔商学资源，提供高含金量的研学与实习，填补软实力短板。' },
+      { title: '升学就业全链条', desc: '不仅关注「成功被录取」，更着眼于毕业后的留港就业与长远发展。' },
+    ],
+    benefits: [
+      { title: '精准择校定位', tag: '路径规划', desc: '专家一对一评估，量身打造最适合的香港高校申请矩阵。', icon: BookOpen },
+      { title: '提升录取概率', tag: '背景赋能', desc: '获取波尔独家商业研学履历，在海量申请者中脱颖而出。', icon: TrendingUp },
+      { title: '掌握前沿政策', tag: '资讯获取', desc: '深度解读香港人才引进计划及毕业生留港发展红利。', icon: Award },
+      { title: '融入精英生态', tag: '资源共享', desc: '提前建立香港本土学习与生活圈层，无缝衔接未来发展。', icon: Users },
+    ],
+    agenda: [
+      { time: '10分钟', title: '破冰与导入', desc: '解读香港作为国际教育枢纽的核心优势与最新人才红利。' },
+      { time: '20分钟', title: '板块一：宏观趋势解析', desc: '深度剖析香港八大名校最新录取门槛、热门专业与竞争态势。' },
+      { time: '40分钟', title: '板块二：高效升学策略', desc: '如何避开申请雷区？量身定制时间轴与背景提升通关秘籍。' },
+      { time: '40分钟', title: '板块三：波尔全链赋能', desc: '介绍波尔如何通过专业研学与咨询，打通「升学→就业」闭环。' },
+      { time: '30分钟', title: '板块四：Q&A 开放式问答', desc: '针对个体情况，专家现场提供客观、中立的升学可行性评估。' },
+      { time: '40分钟', title: '深度洽谈与评估规划', desc: '提供茶歇，自由交流与一对一深度咨询对接。' },
+    ]
   };
-
-  const content = getPageContent();
 
   // --- 表單狀態管理 ---
   const [formData, setFormData] = useState({ name: '', company: '', phone: '' });
@@ -266,39 +218,13 @@ export default function Brochure() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-100">
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">10分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">破冰与导入</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">简述活动背景，引出核心议题。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">
-                        主题探讨
-                        <div className="text-xs text-gray-500 font-normal mt-1">（主题由校方与波尔共同选定）</div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">深入分享本次沙龙的核心议题。</td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">40分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">香港及海外升学就业趋势</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">解读香港及海外升学就业最新动态，助力宏观认知。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">波尔国际商学全景介绍</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">全面介绍波尔教育理念、课程体系、师资力量与学员成果。</td>
-                    </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">30分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">Q&A 开放式问答</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">波尔专家现场解答升学规划、课程设置等热點問題。</td>
-                    </tr>
-                    <tr className="bg-slate-50 hover:bg-gray-100">
-                      <td className="px-6 py-4 text-sm text-gray-500 font-medium">20分钟</td>
-                      <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">交流联谊 & 深度洽談</td>
-                      <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">自由交流与资源对接。</td>
-                    </tr>
+                    {content.agenda.map((item, index) => (
+                      <tr key={index} className={index % 2 === 1 ? "bg-slate-50 hover:bg-gray-100" : "hover:bg-gray-50"}>
+                        <td className="px-6 py-4 text-sm text-gray-500 font-medium">{item.time}</td>
+                        <td className="px-6 py-4 text-sm text-[#0A1628] font-bold">{item.title}</td>
+                        <td className="px-6 py-4 text-sm text-gray-500 leading-relaxed">{item.desc}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
